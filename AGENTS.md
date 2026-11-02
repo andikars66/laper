@@ -43,7 +43,7 @@ Pedoman implementasi, modifikasi dan perawatan Laper: Laporan Perjadin Cepat. Di
 - Pisahkan ID internal, label manusia dan tujuan. Tujuan otomatis berasal dari wilayah terpilih, bukan anak wilayah kebetulan hasil sampling. Tujuan kustom termasuk kosong tetap dipertahankan; kosong gagal validasi. Sediakan reset ke otomatis.
 - Verifikasi setiap titik acak dengan point-in-polygon, bukan bbox saja. Setelah maksimal 100 percobaan, gunakan fallback deterministik yang diverifikasi berada dalam poligon; centroid yang jatuh di luar/di lubang bukan fallback valid.
 - Desa/kecamatan menampilkan catatan cakupan koordinat acak; jangan mengklaim GPS asli foto.
-- Label wilayah photostamp untuk pilihan desa/kecamatan hanya `Desa [nama terpilih]` atau `Kecamatan [nama terpilih]`, tanpa ID maupun nama wilayah anak hasil sampling. Format SLS/SubSLS tetap.
+- Label photostamp desa: `iddesa ● Desa [nama] ● Kec [nama kecamatan]`; kecamatan: `idkec ● Kec [nama]` (ID kecamatan lengkap, contoh 5202010). Mini poligon menampilkan batas gabungan seluruh desa/kecamatan terpilih dari data `regions/{kdkec}.json` yang lazy-loaded, bukan SubSLS hasil sampling. Format SLS/SubSLS tetap.
 
 ## 6. Photostamp dan memori
 

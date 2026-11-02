@@ -40,6 +40,7 @@ import type {
 import {
   filterCandidateFeatures,
   formatRegionStampTag,
+  getRegionStampBoundary,
   getDescendingWorkdayDates,
   getIndonesianDayName,
   getRandomWorkingTime,
@@ -342,7 +343,7 @@ export default function App() {
         const autoTagStr = formatRegionStampTag(newRegion);
         const autoCoordStr = `${lat.toFixed(6)}, ${lng.toFixed(6)}`;
 
-        setActiveFeature(feature);
+        setActiveFeature(await getRegionStampBoundary(newRegion, feature));
         setRegionInfo(newRegion);
         setConfig((prev) => ({
           ...prev,

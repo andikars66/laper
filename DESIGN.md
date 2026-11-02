@@ -142,7 +142,7 @@ Tujuan menunjukkan status **Otomatis dari lokasi** atau **Tujuan kustom; tidak m
 
 Catatan koordinat untuk desa/kecamatan memakai permukaan kuning tenang dan menjelaskan cakupan sampling. Jangan menyebut SLS hasil titik acak sebagai lokasi pasti kunjungan. Pada mode foto asli tidak ada sampling/boundaries hanya demi tujuan otomatis.
 
-Label wilayah pada photostamp untuk pilihan desa/kecamatan hanya **Desa [nama terpilih]** atau **Kecamatan [nama terpilih]**, tanpa ID maupun nama wilayah anak hasil sampling. Format SLS/SubSLS tetap; aturan ini konsisten di preview dan seluruh keluaran.
+Label photostamp desa: **iddesa ● Desa [nama] ● Kec [nama kecamatan]**; kecamatan: **idkec ● Kec [nama]** (ID kecamatan lengkap, contoh 5202010). Mini poligon menampilkan batas gabungan seluruh wilayah terpilih, tanpa garis pembagian antar-SubSLS; pulau terpisah dan lubang poligon dipertahankan. Data `regions/{kdkec}.json` dimuat sesuai kebutuhan. Format SLS/SubSLS tetap; aturan ini konsisten di preview dan seluruh keluaran.
 
 ## 10. Preview Foto, A4 dan print
 

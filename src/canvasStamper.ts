@@ -383,7 +383,7 @@ function drawPolygonRadar(
   }
 
   ctx.fillStyle = palette.radarPolyFill;
-  ctx.fill();
+  ctx.fill('evenodd');
   ctx.strokeStyle = palette.radarPolyStroke;
   ctx.lineWidth = Math.max(1.5, boxSize * 0.022);
   ctx.stroke();

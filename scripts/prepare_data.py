@@ -171,6 +171,9 @@ def main():
             json.dump(fc, f, separators=(",", ":"), ensure_ascii=False)
         print(f"Saved {kec_file.name}: {len(features)} features ({kec_file.stat().st_size / 1024:.1f} KB)")
 
+    from prepare_stamp_boundaries import prepare_stamp_boundaries
+    prepare_stamp_boundaries(out_dir)
+
 
 if __name__ == "__main__":
     main()

@@ -12,6 +12,43 @@ import type {
 // In-memory cache of loaded Kecamatan boundary files
 const boundaryCache = new Map<string, BoundaryCollection>();
 
+type RegionOutline = Pick<BoundaryFeature, 'geometry'> & {
+  bbox: BoundaryFeature['properties']['bbox'];
+};
+interface RegionOutlines {
+  kecamatan: RegionOutline;
+  desa: Record<string, RegionOutline>;
+}
+const outlineCache = new Map<string, Promise<RegionOutlines>>();
+
+/** Mini-map uses the dissolved selected area, not the sampled child polygon. */
+export async function getRegionStampBoundary(
+  region: SelectedRegionInfo,
+  sampledFeature: BoundaryFeature
+): Promise<BoundaryFeature> {
+  if (region.level !== 'desa' && region.level !== 'kecamatan') return sampledFeature;
+  let pending = outlineCache.get(region.kdkec);
+  if (!pending) {
+    const base = (import.meta.env.BASE_URL || './').replace(/\/?$/, '/');
+    pending = fetch(`${base}data/regions/${region.kdkec}.json`).then(async response => {
+      if (!response.ok) throw new Error('Gagal memuat bentuk wilayah terpilih.');
+      return await response.json() as RegionOutlines;
+    }).catch(error => {
+      outlineCache.delete(region.kdkec);
+      throw error;
+    });
+    outlineCache.set(region.kdkec, pending);
+  }
+  const outlines = await pending;
+  const outline = region.level === 'desa' ? outlines.desa[region.iddesa || ''] : outlines.kecamatan;
+  if (!outline) throw new Error('Bentuk wilayah terpilih tidak tersedia.');
+  return {
+    type: 'Feature',
+    properties: { ...sampledFeature.properties, bbox: outline.bbox },
+    geometry: outline.geometry,
+  };
+}
+
 /**
  * Lazy-loads the GeoJSON boundary file for a specific Kecamatan (`kdkec`).
  */
@@ -398,7 +435,7 @@ export async function samplePointFromResolvedTarget(
 
   return {
     regionInfo,
-    activeFeature: feature,
+    activeFeature: await getRegionStampBoundary(regionInfo, feature),
     coordStr,
     tagStr,
   };
@@ -406,8 +443,11 @@ export async function samplePointFromResolvedTarget(
 
 /** Labels the selected scope, rather than a child feature used for sampling. */
 export function formatRegionStampTag(region: SelectedRegionInfo): string {
-  if (region.level === 'kecamatan') return `Kecamatan ${region.nmkec}`;
-  if (region.level === 'desa') return `Desa ${region.nmdesa || ''}`.trim();
+  if (region.level === 'kecamatan') {
+    const idkec = region.iddesa?.length === 10 ? region.iddesa.slice(0, 7) : region.kdkec;
+    return `${idkec} ● Kec ${region.nmkec}`;
+  }
+  if (region.level === 'desa') return `${region.iddesa} ● Desa ${region.nmdesa} ● Kec ${region.nmkec}`;
 
   const idTag = region.idsubsls || region.idsls || region.iddesa || region.kdkec;
   const locParts = [region.nmsls, region.nmdesa, region.nmkec].filter(Boolean);

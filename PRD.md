@@ -91,7 +91,7 @@ Sumber hierarki `public/data/hierarchy.json`; batas `public/data/boundaries/{kdk
 - ID internal dipisahkan dari label manusia serta tujuan laporan. Saat lokasi baru diproses, metadata wilayah lama tidak boleh tetap dianggap valid.
 - Tujuan otomatis berasal dari nama/hierarki **wilayah terpilih**, bukan ID maupun SLS kebetulan tempat titik acak jatuh. Tujuan kustom, termasuk kosong, dipertahankan sampai Gunakan tujuan dari lokasi dipilih. Kosong tetap gagal validasi.
 - Koordinat acak diverifikasi point-in-polygon. Pilihan desa/kecamatan memiliki catatan bahwa koordinat diacak dalam cakupan desa/kelurahan atau kecamatan dan bukan GPS asli foto.
-- Label wilayah photostamp untuk pilihan desa/kecamatan hanya `Desa [nama terpilih]` atau `Kecamatan [nama terpilih]`, tanpa ID maupun nama wilayah anak hasil sampling. Format SLS/SubSLS tetap; berlaku di preview dan seluruh keluaran.
+- Label photostamp desa: `iddesa ● Desa [nama] ● Kec [nama kecamatan]`; kecamatan: `idkec ● Kec [nama]` (ID kecamatan lengkap, contoh 5202010). Mini poligon menampilkan batas gabungan seluruh desa/kecamatan terpilih dari data `regions/{kdkec}.json` yang lazy-loaded, bukan SubSLS hasil sampling. Format SLS/SubSLS tetap; berlaku di preview dan seluruh keluaran.
 - Mode foto asli tetap dapat memilih lokasi untuk tujuan otomatis tanpa sampling koordinat. Tujuan juga dapat diketik langsung tanpa lokasi spasial.
 
 ## 8. Profil, dokumen, dan keluaran
