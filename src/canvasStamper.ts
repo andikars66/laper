@@ -502,6 +502,28 @@ export function renderStampedCanvas(
   // 1. Draw original photo cleanly
   ctx.drawImage(sourceImage, 0, 0, width, height);
 
+  // Lay out small photos in a 700px-wide coordinate space, then scale only
+  // the overlay back down. The 14px font floor must not dominate a tiny photo.
+  // This preserves the source/output resolution and scales icons and spacing too.
+  const layoutWidth = Math.max(700, width);
+  const overlayScale = width / layoutWidth;
+  ctx.save();
+  try {
+    ctx.scale(overlayScale, overlayScale);
+    renderStampOverlay(ctx, layoutWidth, height / overlayScale, config, region, activeFeature);
+  } finally {
+    ctx.restore();
+  }
+}
+
+function renderStampOverlay(
+  ctx: CanvasRenderingContext2D,
+  width: number,
+  height: number,
+  config: StampConfig,
+  region: SelectedRegionInfo | null,
+  activeFeature: BoundaryFeature | null
+) {
   // 2. Resolve design theme, colors, and typography (Default: onyx + clean-poly)
   const colorTheme = config.colorTheme || 'onyx';
   const iconMode = config.iconMode || 'clean-poly';

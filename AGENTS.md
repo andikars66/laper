@@ -53,7 +53,7 @@ Pedoman implementasi, modifikasi dan perawatan Laper — Laporan Perjadin. Diper
 - Daftar hanya File dan thumbnail maksimal 150px. Decode preview hanya foto aktif; tutup bitmap saat berganti/unmount. Jangan decode semua foto besar sekaligus.
 - Ekspor/print: decode satu → render/optimasi → blob/payload terkompresi → tutup bitmap dan kosongkan canvas → berikutnya. Jangan menampung puluhan bitmap/canvas penuh. Bersihkan object URL saat ganti/hapus dan setelah download tidak lagi dipakai.
 - Ekspor foto mandiri bila digunakan harus mempertahankan resolusi asli, terpisah dari preview dan foto dokumen.
-- Typography stempel proporsional: `Math.max(14, Math.round(canvas.width * 0.02))`. Scrim default rgba(0,0,0,0.68), GPS Map Camera Clean: tanggal/jam, koordinat, lalu ID/wilayah ringkas.
+- Typography stempel proporsional: `Math.max(14, Math.round(layoutWidth * 0.02))`, dengan `layoutWidth = Math.max(700, canvas.width)`. Untuk foto di bawah 700px, skalakan seluruh overlay (huruf, ikon, jarak) kembali ke lebar foto agar batas minimum 14px tidak membesarkan stempel; resolusi foto keluaran tetap. Scrim default rgba(0,0,0,0.68), GPS Map Camera Clean: tanggal/jam, koordinat, lalu ID/wilayah ringkas.
 
 ## 7. Dokumen, preview dan print
 

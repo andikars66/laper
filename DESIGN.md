@@ -120,6 +120,7 @@ Detail:
   - Kolom kiri memuat kontrol ringkas dalam satu tampilan tanpa tab: **Paket cepat** (6 tombol 2 kolom dengan indikator warna tunggal), dropdown **Tata letak**, **Warna**, **Huruf**, dan **Peta mini wilayah**, serta tombol segmen **Posisi di foto**, **Ukuran teks**, dan **Kepekatan latar**.
   - Kolom kanan menampilkan **Pratinjau** real-time (memakai foto kunjungan aktif atau latar netral dengan poligon sampel) serta satu baris ringkasan spesifikasi.
   - Tombol aksi: **Kembalikan default**, **Batal**, dan **Simpan** (tersimpan ke localStorage `laper_stamp_config_v2`).
+- Stempel tetap proporsional pada foto kecil: layout memakai lebar acuan minimal 700px dan seluruh overlay diskalakan ke lebar foto keluaran. Batas ukuran huruf 14px berlaku di ruang layout, bukan dipaksakan pada piksel foto kecil. Teks membungkus sesuai lebar tersedia dan tinggi kartu mengikuti isinya.
 - Off menampilkan penjelasan singkat foto asli, menyembunyikan jam/koordinat; tanggal, hari, tujuan dan uraian tetap bisa diisi.
 - Input tanggal/waktu/hari berupa teks dengan ikon di dalam sisi kanan box; bukan tombol berteks Kalender/Jam di luar input. Input mempunyai ruang kanan untuk ikon.
 - Popup kalender/jam mengikuti anchor kiri box. Pilihan Hari memiliki opsi Senin–Minggu dan menutup pada pilihan, klik di luar, fokus keluar atau Escape.
