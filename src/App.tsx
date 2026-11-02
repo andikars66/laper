@@ -39,6 +39,7 @@ import type {
 } from './types';
 import {
   filterCandidateFeatures,
+  formatRegionStampTag,
   getDescendingWorkdayDates,
   getIndonesianDayName,
   getRandomWorkingTime,
@@ -338,9 +339,7 @@ export default function App() {
           lng,
         };
 
-        const idTag = props.idsubsls || props.idsls || props.iddesa || props.kdkec;
-        const locParts = [props.nmsls, props.nmdesa, props.nmkec].filter(Boolean);
-        const autoTagStr = `${idTag} • ${locParts.join(', ')}`;
+        const autoTagStr = formatRegionStampTag(newRegion);
         const autoCoordStr = `${lat.toFixed(6)}, ${lng.toFixed(6)}`;
 
         setActiveFeature(feature);

@@ -142,6 +142,8 @@ Tujuan menunjukkan status **Otomatis dari lokasi** atau **Tujuan kustom; tidak m
 
 Catatan koordinat untuk desa/kecamatan memakai permukaan kuning tenang dan menjelaskan cakupan sampling. Jangan menyebut SLS hasil titik acak sebagai lokasi pasti kunjungan. Pada mode foto asli tidak ada sampling/boundaries hanya demi tujuan otomatis.
 
+Label wilayah pada photostamp untuk pilihan desa/kecamatan hanya **Desa [nama terpilih]** atau **Kecamatan [nama terpilih]**, tanpa ID maupun nama wilayah anak hasil sampling. Format SLS/SubSLS tetap; aturan ini konsisten di preview dan seluruh keluaran.
+
 ## 10. Preview Foto, A4 dan print
 
 Foto: gambar contain, proporsi asli, tidak meregang; latar sekunder, padding sekitar 20px. Seluruh area preview adalah kontrol ganti foto dengan label **Klik untuk mengganti foto**. Jika belum ada, ajak memilih foto. Mode asli tidak menambahkan overlay, mode stamp memperlihatkan overlay reaktif.

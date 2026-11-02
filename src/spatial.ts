@@ -393,9 +393,7 @@ export async function samplePointFromResolvedTarget(
     lng,
   };
 
-  const idTag = props.idsubsls || props.idsls || props.iddesa || props.kdkec;
-  const locParts = [props.nmsls, props.nmdesa, props.nmkec].filter(Boolean);
-  const tagStr = `${idTag} • ${locParts.join(', ')}`;
+  const tagStr = formatRegionStampTag(regionInfo);
   const coordStr = `${lat.toFixed(6)}, ${lng.toFixed(6)}`;
 
   return {
@@ -404,4 +402,14 @@ export async function samplePointFromResolvedTarget(
     coordStr,
     tagStr,
   };
+}
+
+/** Labels the selected scope, rather than a child feature used for sampling. */
+export function formatRegionStampTag(region: SelectedRegionInfo): string {
+  if (region.level === 'kecamatan') return `Kecamatan ${region.nmkec}`;
+  if (region.level === 'desa') return `Desa ${region.nmdesa || ''}`.trim();
+
+  const idTag = region.idsubsls || region.idsls || region.iddesa || region.kdkec;
+  const locParts = [region.nmsls, region.nmdesa, region.nmkec].filter(Boolean);
+  return `${idTag} • ${locParts.join(', ')}`;
 }
