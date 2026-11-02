@@ -454,24 +454,26 @@ function wrapTextLines(
   maxWidth: number
 ): string[] {
   if (!text) return [];
-  const words = text.split(/\s+/);
   const lines: string[] = [];
-  let currentLine = words[0] || '';
-
-  for (let i = 1; i < words.length; i++) {
-    const word = words[i];
-    const testLine = `${currentLine} ${word}`;
-    const metrics = ctx.measureText(testLine);
-    if (metrics.width > maxWidth) {
-      lines.push(currentLine);
-      currentLine = word;
-    } else {
-      currentLine = testLine;
+  let currentLine = '';
+  // Prefer word boundaries; split identifiers only when a single token is too wide.
+  for (const word of text.trim().split(/\s+/)) {
+    const candidate = currentLine ? `${currentLine} ${word}` : word;
+    if (ctx.measureText(candidate).width <= maxWidth) {
+      currentLine = candidate;
+      continue;
+    }
+    if (currentLine) lines.push(currentLine);
+    currentLine = '';
+    for (const char of word) {
+      if (currentLine && ctx.measureText(currentLine + char).width > maxWidth) {
+        lines.push(currentLine);
+        currentLine = '';
+      }
+      currentLine += char;
     }
   }
-  if (currentLine) {
-    lines.push(currentLine);
-  }
+  if (currentLine) lines.push(currentLine);
   return lines;
 }
 
@@ -537,7 +539,17 @@ export function renderStampedCanvas(
   const maxCardWidth = Math.min(width - margin * 2, Math.round(width * 0.9));
   const radarSize = config.showMiniMap ? Math.round(baseFontSize * 4.2) : 0;
   const radarGap = config.showMiniMap ? Math.round(baseFontSize * 0.85) : 0;
-  const maxTextWidth = maxCardWidth - padX * 2 - radarSize - radarGap;
+  // Reserve the largest horizontal padding used by any of the five layouts.
+  const maxTextWidth = Math.max(1, maxCardWidth - Math.round(baseFontSize * 1.25) * 2 - radarSize - radarGap);
+  ctx.font = fontTitle;
+  const dateTimeLines = wrapTextLines(ctx, line1DateTime, maxTextWidth);
+  ctx.font = fontCoord;
+  const coordinateLines = wrapTextLines(ctx, line2Coords, maxTextWidth);
+  const titleHeight = dateTimeLines.length * titleFontSize + Math.max(0, dateTimeLines.length - 1) * lineGap;
+  const coordinateHeight = coordinateLines.length * coordFontSize + Math.max(0, coordinateLines.length - 1) * lineGap;
+  const drawLines = (lines: string[], x: number, y: number, size: number) => {
+    lines.forEach((line, index) => ctx.fillText(line, x, y + index * (size + lineGap)));
+  };
 
   ctx.font = fontMeta;
   const regionLines = config.tagStr.trim()
@@ -550,10 +562,10 @@ export function renderStampedCanvas(
 
   // Measure widest line
   ctx.font = fontTitle;
-  const wLine1 = ctx.measureText(line1DateTime).width;
+  const wLine1 = Math.max(0, ...dateTimeLines.map((line) => ctx.measureText(line).width));
 
   ctx.font = fontCoord;
-  const wLine2 = ctx.measureText(line2Coords).width;
+  const wLine2 = Math.max(0, ...coordinateLines.map((line) => ctx.measureText(line).width));
 
   ctx.font = fontMeta;
   const wRegion = Math.max(
@@ -567,7 +579,7 @@ export function renderStampedCanvas(
     Math.max(wLine1, wLine2, wRegion, baseFontSize * 12)
   );
 
-  let totalTextHeight = titleFontSize + lineGap + coordFontSize;
+  let totalTextHeight = titleHeight + lineGap + coordinateHeight;
   if (regionLines.length > 0) {
     totalTextHeight +=
       lineGap +
@@ -617,9 +629,9 @@ export function renderStampedCanvas(
       : [];
 
     const bannerTextHeight =
-      titleFontSize +
+      titleHeight +
       lineGap +
-      coordFontSize +
+      coordinateHeight +
       (bannerRegionLines.length ? lineGap + bannerRegionLines.length * metaFontSize : 0);
     const bannerInnerH = Math.max(bannerTextHeight, radarSizeBanner);
     const bannerH = Math.round(bannerPadY * 2 + bannerInnerH);
@@ -650,13 +662,13 @@ export function renderStampedCanvas(
 
     ctx.font = fontTitle;
     ctx.fillStyle = palette.titleColor;
-    ctx.fillText(line1DateTime, curX, textY);
-    textY += titleFontSize + lineGap;
+    drawLines(dateTimeLines, curX, textY, titleFontSize);
+    textY += titleHeight + lineGap;
 
     ctx.font = fontCoord;
     ctx.fillStyle = hasTypedCoords ? palette.coordColor : palette.coordColorUnverified;
-    ctx.fillText(line2Coords, curX, textY);
-    textY += coordFontSize;
+    drawLines(coordinateLines, curX, textY, coordFontSize);
+    textY += coordinateHeight;
 
     if (bannerRegionLines.length > 0) {
       textY += lineGap;
@@ -705,13 +717,13 @@ export function renderStampedCanvas(
     const fontBadge = getStampFont(fontFamily, 700, Math.round(metaFontSize * 0.82));
     ctx.font = fontBadge;
     const badgeText = 'DOKUMENTASI KEGIATAN LAPANGAN';
-    const badgeW = ctx.measureText(badgeText).width + baseFontSize;
+    const badgeW = Math.min(ctx.measureText(badgeText).width + baseFontSize, cardW - cardPadX * 2);
     drawRoundedRect(ctx, badgeX, badgeY, badgeW, headerHeight, 4);
     ctx.fillStyle = palette.badgeBg;
     ctx.fill();
     ctx.fillStyle = palette.badgeText;
     ctx.textBaseline = 'middle';
-    ctx.fillText(badgeText, badgeX + Math.round(baseFontSize * 0.5), badgeY + headerHeight / 2);
+    ctx.fillText(badgeText, badgeX + Math.round(baseFontSize * 0.5), badgeY + headerHeight / 2, Math.max(1, badgeW - baseFontSize));
 
     let curX = posX + cardPadX;
     const contentY = badgeY + headerHeight + lineGap;
@@ -728,13 +740,13 @@ export function renderStampedCanvas(
     let curY = contentY;
     ctx.font = fontTitle;
     ctx.fillStyle = palette.titleColor;
-    ctx.fillText(line1DateTime, curX, curY);
-    curY += titleFontSize + lineGap;
+    drawLines(dateTimeLines, curX, curY, titleFontSize);
+    curY += titleHeight + lineGap;
 
     ctx.font = fontCoord;
     ctx.fillStyle = hasTypedCoords ? palette.coordColor : palette.coordColorUnverified;
-    ctx.fillText(line2Coords, curX, curY);
-    curY += coordFontSize;
+    drawLines(coordinateLines, curX, curY, coordFontSize);
+    curY += coordinateHeight;
 
     if (regionLines.length > 0) {
       curY += lineGap;
@@ -783,13 +795,13 @@ export function renderStampedCanvas(
     let curY = startY;
     ctx.font = fontTitle;
     ctx.fillStyle = palette.titleColor;
-    ctx.fillText(line1DateTime, curX, curY);
-    curY += titleFontSize + lineGap;
+    drawLines(dateTimeLines, curX, curY, titleFontSize);
+    curY += titleHeight + lineGap;
 
     ctx.font = fontCoord;
     ctx.fillStyle = hasTypedCoords ? palette.coordColor : palette.coordColorUnverified;
-    ctx.fillText(line2Coords, curX, curY);
-    curY += coordFontSize;
+    drawLines(coordinateLines, curX, curY, coordFontSize);
+    curY += coordinateHeight;
 
     if (regionLines.length > 0) {
       curY += lineGap;
@@ -812,9 +824,9 @@ export function renderStampedCanvas(
     const pillRadarSize = config.showMiniMap ? Math.round(baseFontSize * 3.4) : 0;
     const pillRadarGap = config.showMiniMap ? Math.round(baseFontSize * 0.7) : 0;
     const pillTextH =
-      titleFontSize +
+      titleHeight +
       lineGap +
-      coordFontSize +
+      coordinateHeight +
       (regionLines.length ? lineGap + regionLines.length * metaFontSize : 0);
     const pillInnerH = Math.max(pillTextH, pillRadarSize);
     const pillH = Math.round(pillPadY * 2 + pillInnerH);
@@ -856,13 +868,13 @@ export function renderStampedCanvas(
     let curY = posY + Math.round((pillH - pillTextH) / 2);
     ctx.font = fontTitle;
     ctx.fillStyle = palette.titleColor;
-    ctx.fillText(line1DateTime, curX, curY);
-    curY += titleFontSize + lineGap;
+    drawLines(dateTimeLines, curX, curY, titleFontSize);
+    curY += titleHeight + lineGap;
 
     ctx.font = fontCoord;
     ctx.fillStyle = hasTypedCoords ? palette.coordColor : palette.coordColorUnverified;
-    ctx.fillText(line2Coords, curX, curY);
-    curY += coordFontSize;
+    drawLines(coordinateLines, curX, curY, coordFontSize);
+    curY += coordinateHeight;
 
     if (regionLines.length > 0) {
       curY += lineGap;
@@ -913,14 +925,14 @@ export function renderStampedCanvas(
   // Line 1: Date & Time
   ctx.font = fontTitle;
   ctx.fillStyle = palette.titleColor;
-  ctx.fillText(line1DateTime, textStartX, cursorY);
-  cursorY += titleFontSize + lineGap;
+  drawLines(dateTimeLines, textStartX, cursorY, titleFontSize);
+  cursorY += titleHeight + lineGap;
 
   // Line 2: Coordinates
   ctx.font = fontCoord;
   ctx.fillStyle = hasTypedCoords ? palette.coordColor : palette.coordColorUnverified;
-  ctx.fillText(line2Coords, textStartX, cursorY);
-  cursorY += coordFontSize;
+  drawLines(coordinateLines, textStartX, cursorY, coordFontSize);
+  cursorY += coordinateHeight;
 
   // Line 3: Tagging / Region Text
   if (regionLines.length > 0) {
