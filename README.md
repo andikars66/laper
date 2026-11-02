@@ -1,4 +1,4 @@
-# Laper — Laporan Perjadin
+# Laper: Laporan Perjadin Cepat
 
 Aplikasi web untuk menyusun laporan perjalanan dinas dari foto dokumentasi dan data Excel/CSV. Laper menggabungkan pengisian data kunjungan, penambahan photostamp, pratinjau laporan, dan ekspor Word dalam satu tempat.
 

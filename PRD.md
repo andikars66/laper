@@ -8,7 +8,7 @@ Laper membantu pengguna menyelesaikan banyak laporan perjalanan dinas dari foto 
 
 **Unit kerja: 1 laporan = 1 kunjungan = 1 hari = 1 foto dokumentasi.** Dua foto dengan tanggal sama tetap dua kunjungan. Sebuah laporan boleh memiliki beberapa halaman A4 bila kontennya panjang. Draf dari Excel boleh belum memiliki foto, tetapi belum siap diekspor atau dicetak.
 
-Identitas produk: **Laper — Laporan Perjadin**, favicon dokumen hitam-putih. Halaman awal langsung workspace Laporan Perjadin, tanpa navbar/header merek maupun pilihan Geostamp Satuan/Massal.
+Identitas produk: **Laper: Laporan Perjadin Cepat**, favicon dokumen hitam-putih. Halaman awal langsung workspace Laporan Perjadin, tanpa navbar/header merek maupun pilihan Geostamp Satuan/Massal.
 
 ## 2. Batas produk dan acuan
 

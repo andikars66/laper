@@ -1,6 +1,6 @@
 # AGENTS.md — Laper
 
-Pedoman implementasi, modifikasi dan perawatan Laper — Laporan Perjadin. Diperbarui 31 Oktober 2026.
+Pedoman implementasi, modifikasi dan perawatan Laper: Laporan Perjadin Cepat. Diperbarui 31 Oktober 2026.
 
 ## 1. Acuan dan cara kerja
 
@@ -19,7 +19,7 @@ Pedoman implementasi, modifikasi dan perawatan Laper — Laporan Perjadin. Diper
 ## 3. Kontrak produk yang harus dijaga
 
 - Satu laporan = satu kunjungan = satu hari = satu foto; satu laporan dapat berlanjut ke beberapa halaman A4. Draf boleh belum punya foto.
-- Halaman awal workspace Laporan Perjadin. Nama tab Laper — Laporan Perjadin, favicon hitam-putih. Tidak ada navbar/header merek atau mode Geostamp Satuan/Massal.
+- Halaman awal workspace Laporan Perjadin. Nama tab Laper: Laporan Perjadin Cepat, favicon hitam-putih. Tidak ada navbar/header merek atau mode Geostamp Satuan/Massal.
 - Toolbar hanya Tambah foto, Impor & template, Ekspor & cetak. Jangan kembalikan pencarian kunjungan, checkbox Perlu dilengkapi, dropdown perlakuan unggahan, atau switch photostamp massal.
 - Hanya thumbnail dokumentasi membuka pemilih foto baris itu. Klik bagian baris lainnya membuka detail; checkbox khusus seleksi. Target penggantian dicatat sebelum pemilih terbuka.
 - Pencocokan foto: reservasi nama aktual/harapan Excel dahulu; fallback ke kunjungan aktif maksimal sekali per batch; sisanya baris baru. Jangan menimpa berulang atau menghapus metadata saat ganti foto. Bersihkan resource lama.

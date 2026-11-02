@@ -8,7 +8,7 @@ Dokumen ini mengatur tampilan dan interaksi Laper. [PRD.md](PRD.md) menentukan p
 
 Aplikasi kerja untuk menyusun banyak laporan, bukan landing page. Arah **Framed sheet**: bidang kerja putih dalam bingkai zinc terang, informasi padat tetapi dikelompokkan, dengan daftar kunjungan sebagai objek utama dan detail/hasil di sampingnya.
 
-- Nama produk pada judul tab: Laper — Laporan Perjadin. Favicon dokumen hitam-putih dari `public/favicon.svg`.
+- Nama produk pada judul tab: Laper: Laporan Perjadin Cepat. Favicon dokumen hitam-putih dari `public/favicon.svg`.
 - Tidak ada navbar, header merek, sidebar permanen atau navigasi Geostamp Satuan/Massal.
 - Tidak ada KPI dekoratif, ilustrasi sambutan, gradient, glass/blur, glow, emoji dekoratif atau entrance animation.
 - Border tipis boleh untuk kontrol, tabel dan pemisahan panel. Shadow hanya untuk elemen mengambang seperti menu; bukan panel permanen.
