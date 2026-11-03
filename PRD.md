@@ -25,13 +25,13 @@ Identitas produk: **Laper: Laporan Perjadin Cepat**, favicon dokumen hitam-putih
 3. Gambar membentuk atau melengkapi kunjungan. Spreadsheet dapat membentuk draf terlebih dahulu tanpa foto.
 4. Pengguna mengisi profil/kegiatan/ST bersama dan melengkapi metadata per kunjungan pada panel Detail.
 5. Tab Foto dan Laporan A4 memperlihatkan hasil reaktif; tidak ada Generate/Terapkan untuk menyegarkan preview.
-6. Pengguna memilih kunjungan bila perlu, lalu membuka Ekspor & cetak untuk Word gabungan, ZIP Word terpisah, atau cetak pilihan.
+6. Pengguna memilih kunjungan bila perlu, lalu membuka Unduh hasil untuk Word gabungan, ZIP Word terpisah, atau cetak pilihan.
 
 ## 4. Workspace dan daftar kunjungan
 
 Urutan layar: judul dan deskripsi singkat, ringkasan pegawai/kegiatan/ST, notifikasi/progres bila ada, toolbar, toolbar seleksi bila ada, daftar serta panel detail/preview.
 
-Toolbar hanya **Tambah foto**, **Impor & template**, **Ekspor & cetak**, berdekatan. Tidak ada kolom pencarian kunjungan atau checkbox Perlu dilengkapi. Semua kunjungan tampil. Menu impor/ekspor mengambang di atas konten tanpa menggeser layout.
+Toolbar hanya **Tambah foto**, **Impor excel**, **Unduh hasil**, berdekatan. Tidak ada kolom pencarian kunjungan atau checkbox Perlu dilengkapi. Semua kunjungan tampil. Menu impor/ekspor mengambang di atas konten tanpa menggeser layout.
 
 Daftar memuat kolom seleksi, **Dokumentasi** (thumbnail, nama file, nama preset uraian atau Uraian kustom/Uraian belum diisi), **Tanggal / hari** (input tanggal type-able beserta nama hari), **Lokasi** (input combobox lokasi type-able dengan autocomplete), dan **Kelengkapan**. Informasi jam tidak ditampilkan pada baris daftar kunjungan (tetap diatur di panel Detail). Pengguna dapat langsung mengubah tanggal dan lokasi di tabel dengan alur keyboard `Tab` berurutan (`Tanggal baris 1` → `Lokasi baris 1` → `Tanggal baris 2` → `Lokasi baris 2`). Total berasal dari data, bukan angka terpisah.
 
@@ -43,7 +43,7 @@ Daftar memuat kolom seleksi, **Dokumentasi** (thumbnail, nama file, nama preset 
 
 ## 5. Impor, draf, dan pemasangan foto
 
-Format input: gambar yang didukung browser (utama JPG, PNG, WebP), XLSX, XLS, CSV. Area kosong menerima pilih file serta drag-and-drop. Satu proses gabungan menerima satu spreadsheet dan beberapa gambar: metadata diproses dahulu, lalu foto dipasangkan. Beberapa spreadsheet sekaligus ditolak dengan pesan jelas.
+Format input: gambar yang didukung browser (utama JPG, PNG, WebP), XLSX, XLS, CSV. Tombol **Tambah foto/excel** di area kosong membuka pemilih gambar dan Excel/CSV. Area ini juga menerima drag-and-drop. Satu proses gabungan menerima satu spreadsheet dan beberapa gambar: metadata diproses dahulu, lalu foto dipasangkan. Beberapa spreadsheet sekaligus ditolak dengan pesan jelas.
 
 Impor ke daftar kosong membentuk satu draf per baris yang dikenali. Baris kosong diabaikan; variasi header/tanggal/nama wilayah ditangani. Draf tanpa foto dapat diedit dan dipratinjau A4 dengan placeholder, tidak didecode sebagai gambar.
 
@@ -106,7 +106,7 @@ ST opsional. Jika nomor tersedia, pembuka menyebut nomor dan tanggal bila tersed
 
 Gambar dokumen proporsional, lebar sekitar 9,5cm sesuai layout, maksimal 1200px dan JPEG sekitar 85%. Ini terpisah dari ekspor foto mandiri yang harus mempertahankan resolusi asli bila fitur itu digunakan.
 
-Menu **Ekspor & cetak**:
+Menu **Unduh hasil**:
 
 - Word gabungan dan ZIP Word terpisah: gunakan seleksi bila ada; jika tidak, semua laporan. Nyatakan cakupan.
 - Cetak laporan terpilih: hanya yang dicentang; tidak aktif tanpa seleksi. Siapkan dokumen terisolasi dari UI/zoom preview, A4 tanpa margin ganda, lalu buka dialog cetak browser. Bersihkan setelah selesai. Jangan memicu printer langsung.

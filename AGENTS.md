@@ -20,7 +20,7 @@ Pedoman implementasi, modifikasi dan perawatan Laper: Laporan Perjadin Cepat. Di
 
 - Satu laporan = satu kunjungan = satu hari = satu foto; satu laporan dapat berlanjut ke beberapa halaman A4. Draf boleh belum punya foto.
 - Halaman awal workspace Laporan Perjadin. Nama tab Laper: Laporan Perjadin Cepat, favicon hitam-putih. Tidak ada navbar/header merek atau mode Geostamp Satuan/Massal.
-- Toolbar hanya Tambah foto, Impor & template, Ekspor & cetak. Jangan kembalikan pencarian kunjungan, checkbox Perlu dilengkapi, dropdown perlakuan unggahan, atau switch photostamp massal.
+- Toolbar hanya Tambah foto, Impor excel, Unduh hasil. Jangan kembalikan pencarian kunjungan, checkbox Perlu dilengkapi, dropdown perlakuan unggahan, atau switch photostamp massal.
 - Hanya thumbnail dokumentasi membuka pemilih foto baris itu. Klik bagian baris lainnya membuka detail; checkbox khusus seleksi. Target penggantian dicatat sebelum pemilih terbuka.
 - Pencocokan foto: reservasi nama aktual/harapan Excel dahulu; fallback ke kunjungan aktif maksimal sekali per batch; sisanya baris baru. Jangan menimpa berulang atau menghapus metadata saat ganti foto. Bersihkan resource lama.
 - Penghapusan satu pada header detail rata kanan; hapus seleksi pada toolbar seleksi. Tidak ada Hapus di kolom Kelengkapan.
@@ -28,7 +28,7 @@ Pedoman implementasi, modifikasi dan perawatan Laper: Laporan Perjadin Cepat. Di
 
 ## 4. Impor dan integritas state
 
-- Terima gambar atau Excel/CSV sebelum maupun sesudah foto, lewat pemilih dan drop area daftar. Input gabungan: maksimal satu spreadsheet, proses metadata dahulu lalu foto.
+- Terima gambar atau Excel/CSV sebelum maupun sesudah foto. Tombol **Tambah foto/excel** di area kosong membuka pemilih gabungan; drop area daftar juga menerima kedua jenis file. Input gabungan: maksimal satu spreadsheet, proses metadata dahulu lalu foto.
 - Parser toleran baris kosong, variasi header/tanggal/nama lokasi. Draf tanpa foto menyimpan penanda eksplisit; jangan decode File placeholder atau menganggapnya dokumentasi valid.
 - Draf dapat diedit/preview, tetapi ekspor dan cetak memerlukan foto. Pemasangan foto mempertahankan ID, hari/tanggal/jam, lokasi, tujuan, uraian, profil/ST dan switch.
 - Pemetaan metadata spreadsheet ke baris yang sudah ada perlu dapat diperiksa. Jangan diam-diam memakai urutan saat nama tidak cocok/ambigu; pemetaan urutan harus eksplisit. Jangan mengklaim alur ini sudah aman hanya karena impor awal berhasil.

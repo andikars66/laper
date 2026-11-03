@@ -75,13 +75,13 @@ Urutan tetap:
 1. Judul Laporan Perjadin, kalimat penjelas singkat, dan tombol ikon gear (SVG) Pengaturan Photostamp di pojok kanan atas.
 2. Ringkasan pegawai, kegiatan, ST; tombol Ubah profil & kegiatan.
 3. Notifikasi dan progres bila ada.
-4. Toolbar **Tambah foto · Impor & template · Ekspor & cetak**.
+4. Toolbar **Tambah foto · Impor excel · Unduh hasil**.
 5. Toolbar seleksi bila ada.
 6. Daftar kunjungan dan panel detail/preview.
 
 Tidak ada search kunjungan, filter Perlu dilengkapi atau opsi perlakuan foto unggahan. Jangan memakai margin-left:auto untuk memisahkan jauh tombol impor/ekspor. Toolbar selection menyatakan jumlah dipilih, preset uraian bersama, Hapus N terpilih, dan Batal pilih.
 
-Menu Ekspor & cetak memuat Word gabungan, ZIP Word terpisah, Cetak laporan terpilih, lalu ringkasan cakupan. Print nonaktif tanpa seleksi; Word/ZIP menggunakan seleksi atau semua bila tidak ada.
+Menu Unduh hasil memuat Word gabungan, ZIP Word terpisah, Cetak laporan terpilih, lalu ringkasan cakupan. Print nonaktif tanpa seleksi; Word/ZIP menggunakan seleksi atau semua bila tidak ada.
 
 ## 6. Menu dan lapisan
 
@@ -104,7 +104,7 @@ Kolom desktop: checkbox, Dokumentasi, Tanggal / hari, Lokasi, Kelengkapan. Tangg
 - Status desktop: Siap atau Lengkapi, dengan detail kekurangan di inspector. Tidak ada tombol Hapus pada kolom status.
 - Mobile: nama file, label uraian, dan status (**✓ Lengkap** atau **Perlu dilengkapi**) ditempatkan tepat di bawah thumbnail foto di sisi kiri baris, sementara input Tanggal / hari dan Lokasi tersusun rapi di sisi kanan agar keduanya memiliki lebar ketik yang memadai.
 
-Area kosong mempunyai heading **Mulai dari foto atau Excel**, penjelasan draf, tombol **Pilih gambar atau Excel**, dan daftar format. Border dashed yang tenang menandakan drop area. Drag-and-drop menerima gambar/Excel/CSV; jangan memakai ilustrasi dekoratif untuk menggantikan aksi.
+Area kosong mempunyai heading **Mulai dari foto atau Excel**, penjelasan draf, tombol **Tambah foto/excel**, dan daftar format. Border dashed yang tenang menandakan drop area. Drag-and-drop menerima gambar/Excel/CSV; jangan memakai ilustrasi dekoratif untuk menggantikan aksi.
 
 ## 8. Inspector dan kontrol metadata
 
